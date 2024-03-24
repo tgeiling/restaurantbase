@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+
+class CartItem {
+  final String id;
+  final String title;
+  final int quantity;
+  final double price;
+
+  CartItem({
+    required this.id,
+    required this.title,
+    required this.quantity,
+    required this.price,
+  });
+}
+
+class CartProvider with ChangeNotifier {
+  Map<String, CartItem> _items = {};
+  Map<String, int> _selectedQuantities = {};
+
+  Map<String, CartItem> get items {
+    return {..._items};
+  }
+
+  int get itemCount {
+    return _items.length;
+  }
+
+  double get totalAmount {
+    var total = 0.0;
+    _items.forEach((key, cartItem) {
+      total += cartItem.price * cartItem.quantity;
+    });
+    return total;
+  }
+
+  int getSelectedQuantity(String productId) {
+    return _selectedQuantities[productId] ?? 0;
+  }
+
+  void incrementSelectedQuantity(String productId) {
+    _selectedQuantities.update(productId, (value) => value + 1,
+        ifAbsent: () => 1);
+    notifyListeners();
+  }
+
+  void decrementSelectedQuantity(String productId) {
+    if (_selectedQuantities.containsKey(productId) &&
+        _selectedQuantities[productId]! > 1) {
+      _selectedQuantities.update(productId, (value) => value - 1);
+    } else {
+      _selectedQuantities.remove(productId);
+    }
+    notifyListeners();
+  }
+
+  void addItem(String productId, double price, String title) {
+    int quantityToAdd = _selectedQuantities[productId] ?? 1;
+    if (_items.containsKey(productId)) {
+      _items.update(
+        productId,
+        (existingCartItem) => CartItem(
+          id: existingCartItem.id,
+          title: existingCartItem.title,
+          price: existingCartItem.price,
+          quantity: existingCartItem.quantity + quantityToAdd,
+        ),
+      );
+    } else {
+      _items.putIfAbsent(
+        productId,
+        () => CartItem(
+          id: DateTime.now().toString(),
+          title: title,
+          price: price,
+          quantity: quantityToAdd,
+        ),
+      );
+    }
+    _selectedQuantities.remove(productId);
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _items = {};
+    notifyListeners();
+  }
+}
