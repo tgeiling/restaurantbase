@@ -62,21 +62,26 @@ class _MainScaffoldState extends State<MainScaffold> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            // Use the controller to switch pages
             _pageController.animateToPage(index,
                 duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
           });
         },
         items: [
           SalomonBottomBarItem(
-            icon: Icon(Icons.menu_book),
+            icon: Icon(
+              Icons.menu_book,
+              color: Colors.grey.shade800,
+            ),
             title: Text("Menu"),
-            selectedColor: Colors.purple,
+            selectedColor: Colors.grey.shade500,
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(
+              Icons.list,
+              color: Colors.grey.shade800,
+            ),
             title: Text("Orders"),
-            selectedColor: Colors.teal,
+            selectedColor: Colors.grey.shade500,
           ),
         ],
       ),

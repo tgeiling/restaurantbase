@@ -26,15 +26,14 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logo.png
-    - assets/menu/coffee.jpg
-    - assets/menu/wine.jpg
-    - assets/menu/food1.jpg
-    - assets/menu/food2.jpg
-    - assets/menu/food3.jpg
-    - assets/menu/food4.jpg
-    - assets/menu/food5.jpg
-    - assets/menu/food6.jpg
-    - assets/menu/food7.jpg
+    - assets/menu/drink1.png
+    - assets/menu/drink2.png
+    - assets/menu/food1.png
+    - assets/menu/food2.png
+    - assets/menu/food3.png
+    - assets/menu/food4.png
+    - assets/menu/food5.png
+    - assets/menu/food6.png
 
   fonts:
     - family: Roboto
