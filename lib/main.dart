@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:provider/provider.dart';
+
 import 'cartProvider.dart';
 
 import 'menu.dart';
+import 'cart.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,7 +39,7 @@ class _MainScaffoldState extends State<MainScaffold> {
 
   final List<Widget> _pages = [
     MenuPage(),
-    Center(child: Text('Orders')),
+    CartPage(),
   ];
 
   @override
